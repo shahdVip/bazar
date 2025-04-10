@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  catalog:
+    build:
+      context: ./catalog-service
+    ports:
+      - "4568:4568"
+    networks:
+      - bazar-net
+
+  order:
+    build:
+      context: ./order-service
+    ports:
+      - "4569:4569"
+    depends_on:
+      - catalog
+    networks:
+      - bazar-net
+
+networks:
+  bazar-net:
+    driver: bridge
